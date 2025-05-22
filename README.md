@@ -18,3 +18,4 @@ urls for photos are periodically scraped from my icloud shared album, which the 
 
 - <https://github.com/bertrandom/icloud-shared-album-to-flickr>
 - <https://www.icloud.com/sharedalbum/#B25JtdOXmhS13T>
+- <https://lelinhtinh.github.io/de4js/>
