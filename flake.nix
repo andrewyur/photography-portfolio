@@ -11,7 +11,7 @@
         in {
             devShell = pkgs.mkShell {
                 packages = with pkgs; [
-                    uv
+                    nodejs_24
                 ];
                 shellHook = "zsh";
             };
