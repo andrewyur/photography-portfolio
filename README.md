@@ -1,21 +1,14 @@
 # photography-portfolio
 
-portfolio website for my photograpy
+portfolio website for my photography
 
-urls for photos are periodically scraped from my icloud shared album, which the client uses to load.
+metadata for photos are periodically fetched from this [service](https://github.com/andrewyur/photography-fetcher#), stored in a cloud storage bucket, which is then loaded by the client and used to fetch urls for the photos.
 
 ## Features
 
 - [ ] overall Loading animation
 - [ ] individual photo loading animation (blurry to sharp, not pixelated)
 
-## Todo
-
-- [ ] reverse engineer shared album website
-- [ ] build a fetcher using this API that saves photo urls
-
 ## Resources
 
-- <https://github.com/bertrandom/icloud-shared-album-to-flickr>
 - <https://www.icloud.com/sharedalbum/#B25JtdOXmhS13T>
-- <https://lelinhtinh.github.io/de4js/>
