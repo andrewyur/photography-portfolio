@@ -6,11 +6,17 @@ metadata for photos are periodically fetched from this [service](https://github.
 
 ## Todo
 
-- [ ] initial photo metdatata processing
-- [ ] PhotoBatch
+- [x] initial photo metdatata processing
+- [x] PhotoBatch
 - [ ] photo loader service
 - [ ] PhotoCard
 - [ ] fullscreen photo viewing
+- [ ] decoration
+  - [ ] wall texture
+  - [ ] photo frames and time cards
+  - [ ] album title and title photo
+  - [ ] paper texture for closeup
+  - [ ] film click and blink on closup switch
 
 ## Resources
 

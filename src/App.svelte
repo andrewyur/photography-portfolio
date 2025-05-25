@@ -9,8 +9,15 @@
   // different in dev vs prod mode
 
   async function loadMetadata() {
-    // need to do this in dev mode bcs i forgot to add cors headers at first 🙄
-    const metadataUrl = import.meta.env.VITE_PHOTO_METADATA_URL + "?nocache=" + Date.now();
+    let metadataUrl
+    if(import.meta.env.DEV) {
+      metadataUrl = '/photos_metadata copy.json'
+    } else {
+      // need to do this in dev mode bcs i forgot to add cors headers at first 🙄
+      metadataUrl = import.meta.env.VITE_PHOTO_METADATA_URL + "?nocache=" + Date.now();
+    }
+
+
     try {
       const response = await fetch(metadataUrl)
       metadata = await response.json()
@@ -18,9 +25,6 @@
       console.error(error.message)
     }
   }
-
-  $inspect(batches)
-  $inspect(doneLoading)
 
   // divide into batches, send each batch to a PhotoBatch component
 
@@ -32,8 +36,10 @@
       batchEnd += 1
     }
 
+    const id = import.meta.env.DEV ? batchStart : metadata[batchStart].batchGuid
+
     const batchProps = {
-      id: metadata[batchStart].batchGuid,
+      id,
       photoMetadata: metadata.slice(batchStart, batchEnd),
       endIndex: batchEnd,
     }
@@ -81,6 +87,8 @@
 <style>
 
   #intersect-div {
+    --bg1: #feffbc;
+    --bg2: #fff786;
     height: 100vh;
     width: 100vw;
     overflow-y: scroll;
