@@ -4,6 +4,7 @@
     const random = (arr) => arr[Math.floor(Math.random() * arr.length)]
 
 	const layouts = {
+        1: () => one,
 		2: () => two,
 		3: () => random([three1, three2, three3]),
 		5: () => random([five1, five2]),
@@ -14,6 +15,12 @@
         return layouts[num]()
 	}
 </script>
+
+{#snippet one([a])} 
+    <div class="one">
+        <PhotoCard {...a} />
+    </div>
+{/snippet}
 
 {#snippet two([a, b])}
     <div class="grid-2">
@@ -79,6 +86,11 @@
 {/snippet}
 
 <style>
+    .one {
+        width: 75%;
+        margin: auto;
+    }
+
     .grid-2 {
 		display: grid;
 		grid-template-columns: 1fr 1fr;

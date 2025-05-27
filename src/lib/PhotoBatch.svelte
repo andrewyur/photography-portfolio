@@ -32,7 +32,6 @@
     }
 
     function computeLayoutSlices(metadata) {
-        // svelte-ignore non_reactive_update
         let divisions = findLayoutDivision(metadata.length)
         shuffle(divisions)
 

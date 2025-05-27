@@ -9,14 +9,7 @@
   // different in dev vs prod mode
 
   async function loadMetadata() {
-    let metadataUrl
-    if(import.meta.env.DEV) {
-      metadataUrl = '/photos_metadata copy.json'
-    } else {
-      // need to do this in dev mode bcs i forgot to add cors headers at first 🙄
-      metadataUrl = import.meta.env.VITE_PHOTO_METADATA_URL + "?nocache=" + Date.now();
-    }
-
+    let metadataUrl = import.meta.env.VITE_BUCKET_URL
 
     try {
       const response = await fetch(metadataUrl)
@@ -56,7 +49,7 @@
       if(entry.isIntersecting && !doneLoading) {
         addPhotoBatch()
       }
-    }, {root: intersectDiv, rootMargin: "0px 0px 500px 0px"})
+    }, {root: intersectDiv, rootMargin: "0px 0px 1000px 0px"})
 
     intersectionObserver.observe(node)
   } 
