@@ -3,6 +3,7 @@
   import { metadata, photoCallbacks } from "./lib/appStores.svelte";
   import FullscreenViewer from "./lib/FullscreenViewer.svelte";
   import { setContext } from "svelte";
+    import TitleCard from "./lib/TitleCard.svelte";
 
   let batches = $state([])
   let doneLoading = $derived((batches.at(-1)?.endIndex ?? 0) >= ($metadata.length ?? 0))
@@ -77,6 +78,7 @@
 </script>
 
 <main id="intersect-div" bind:this={scrollableRef}>
+  <TitleCard/>
   {#each batches as batch (batch.id)}
     <PhotoBatch {...batch} />
   {/each}
@@ -93,6 +95,8 @@
     height: 100vh;
     width: 100vw;
     overflow-y: scroll;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   #sentinel {

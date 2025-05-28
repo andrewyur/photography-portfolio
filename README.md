@@ -15,12 +15,9 @@ the website passes calls to the url generation API through a private forward pro
 - [x] photo loader service
 - [x] PhotoCard
 - [x] fullscreen photo viewing
-- [ ] decoration
-  - [ ] repeating wall texture
-  - [ ] photo frames and time cards
-  - [ ] album title and title photo
-  - [ ] paper texture for closeup
-  - [ ] film click and blink on closup switch
+- [x] decoration
+  - [x] album title and title photo
+  - [x] favicon & page title
 
 ## Resources
 

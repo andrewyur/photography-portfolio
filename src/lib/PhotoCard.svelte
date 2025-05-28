@@ -1,7 +1,7 @@
 <script>
     import { getContext } from "svelte";
     import { metadata, photoCallbacks, selectedPhoto, enterFullscreen} from "./appStores.svelte";
-    import { loadDerivativeUrls } from "./PhotoLoader.svelte";
+    import { loadDerivativeUrls } from "./photoLoader";
 
     // send photo metadata to photoloader when close to being rendered
     // handle thumbnail & full res loading
@@ -13,8 +13,11 @@
 
     const aspectRatio = width / height
 
-    const percent = 70 + Math.ceil(Math.random() * 30)
+    const percent = 70 + Math.ceil(Math.random() * 25)
     const dimension = height > width ? "height" : "width"
+
+    const xOffset = Math.ceil(Math.random() * 20) - 10
+    const yOffset = Math.ceil(Math.random() * 20) - 10
 
     let lowResUrl = $state()
     let highResUrl = $state()
@@ -31,7 +34,7 @@
         highResUrl = derivativeUrls[derivatives[maxRes].checksum]
     }
 
-    function onHighResLoad(event) {
+    function onLoad(event) {
         event.target.classList.add("loaded")
     }
 
@@ -61,35 +64,33 @@
 <div class="photoCard"
     style="{dimension}: {percent}%"
     style:aspect-ratio={aspectRatio}
+    style:transform="translateX({xOffset}px) translateY({yOffset}px)"
     onclick={selectPhoto}
     bind:this={photoCardNode}
 >
-    <img class="lowRes" src={lowResUrl}/>
-    <img class="highRes" src={highResUrl} onload={onHighResLoad} class:loaded={false}/>
+    <img class="lowRes" src={lowResUrl} onload={onLoad}/>
+    <img class="highRes" src={highResUrl} onload={onLoad} class:loaded={false}/>
 </div>
 
 <style>
     .photoCard {
         position: relative;
-        background-color: aquamarine;
+        background-color: rgba(1,1,1,0.1);
         margin: auto;
         grid-column: var(--g-cols);
         grid-row: var(--g-rows);
     }
 
     .lowRes, .highRes {
-        transition: opacity 0.1s ease;
+        transition: opacity 0.2s ease;
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
-    }
-
-    .highRes {
         opacity: 0;
     }
 
-    .highRes.loaded {
+    .loaded {
         opacity: 1;
     }
 </style>

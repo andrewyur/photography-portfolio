@@ -88,6 +88,7 @@ class:focused={false}
     margin: 0;
     padding: 3vw;
     touch-action: manipulation;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   }
 
   #exit {

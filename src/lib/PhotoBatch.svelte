@@ -1,6 +1,6 @@
 <script>
     import { getLayoutSnippet } from "./layouts.svelte"
-    import { findLayoutDivision } from "./LayoutFinder.svelte";
+    import { findLayoutDivision } from "./layoutFinder";
     import { metadata } from "./appStores.svelte";
 
     // determine best layout for given photos
@@ -67,12 +67,15 @@
         min-height: 300px;
         width: 100%;
         box-sizing: border-box;
-        background-color: red;
-        max-width: 1000px;
+        /* background-color: red; */
         margin: auto;
         margin-bottom: 10px;
-        padding-left: 10px;
-        padding-right: 10px;
+        max-width: 1000px;
     }
 
+    p {
+        /* font-size: x-large; */
+        font-style: italic;
+        margin-bottom: 0 ;
+    }
 </style>
