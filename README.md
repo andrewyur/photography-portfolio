@@ -14,7 +14,7 @@ the website passes calls to the url generation API through a private forward pro
 - [x] PhotoBatch
 - [x] photo loader service
 - [x] PhotoCard
-- [ ] fullscreen photo viewing
+- [x] fullscreen photo viewing
 - [ ] decoration
   - [ ] repeating wall texture
   - [ ] photo frames and time cards

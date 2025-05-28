@@ -1,9 +1,14 @@
 <script>
   import PhotoBatch from "./lib/PhotoBatch.svelte";
+  import { metadata, photoCallbacks } from "./lib/appStores.svelte";
+  import FullscreenViewer from "./lib/FullscreenViewer.svelte";
+  import { setContext } from "svelte";
 
-  let metadata = $state(null)
   let batches = $state([])
-  let doneLoading = $derived((batches.at(-1)?.endIndex ?? 0) >= (metadata?.length ?? 0))
+  let doneLoading = $derived((batches.at(-1)?.endIndex ?? 0) >= ($metadata.length ?? 0))
+  let scrollableRef;
+
+  setContext("scrollableRef", () => scrollableRef)
 
   // fetch photo metadata
   // different in dev vs prod mode
@@ -13,7 +18,8 @@
 
     try {
       const response = await fetch(metadataUrl)
-      metadata = await response.json()
+      $metadata = await response.json()
+      $photoCallbacks = Array($metadata.length)
     } catch (error) {
       console.error(error.message)
     }
@@ -22,19 +28,19 @@
   // divide into batches, send each batch to a PhotoBatch component
 
   function addPhotoBatch() {
-    let batchStart = batches.at(-1)?.endIndex ?? 0 // inclusive
+    let batchStart = batches.at(-1)?.batchEnd ?? 0 // inclusive
     let batchEnd = batchStart // exclusive
 
-    while(batchEnd < metadata.length && metadata[batchStart].batchGuid == metadata[batchEnd].batchGuid) {
+    while(batchEnd < $metadata.length && $metadata[batchStart].batchGuid == $metadata[batchEnd].batchGuid) {
       batchEnd += 1
     }
 
-    const id = import.meta.env.DEV ? batchStart : metadata[batchStart].batchGuid
+    const id = import.meta.env.DEV ? batchStart : $metadata[batchStart].batchGuid
 
     const batchProps = {
       id,
-      photoMetadata: metadata.slice(batchStart, batchEnd),
-      endIndex: batchEnd,
+      batchStart,
+      batchEnd,
     }
 
     batches.push(batchProps)
@@ -70,12 +76,14 @@
   loadMetadata().then(initialLoad)
 </script>
 
-<main id="intersect-div">
+<main id="intersect-div" bind:this={scrollableRef}>
   {#each batches as batch (batch.id)}
-    <PhotoBatch photosMetadata={batch.photoMetadata}/>
+    <PhotoBatch {...batch} />
   {/each}
   <div id="sentinel" use:loadOnScroll></div>
 </main>
+
+<FullscreenViewer/>
 
 <style>
 
@@ -91,5 +99,4 @@
     width: 100%;
     height: 20px;
   }
-
 </style>

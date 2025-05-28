@@ -1,12 +1,13 @@
 <script>
     import { getLayoutSnippet } from "./layouts.svelte"
     import { findLayoutDivision } from "./LayoutFinder.svelte";
+    import { metadata } from "./appStores.svelte";
 
     // determine best layout for given photos
     // display batch time/date
     // pass individual photo metadata and size into PhotoCard component 
 
-    const { photosMetadata } = $props()
+    const { batchStart, batchEnd } = $props()
 
     // fisher-yates shuffle, in place
     function shuffle(array) {
@@ -31,11 +32,13 @@
         }
     }
 
-    function computeLayoutSlices(metadata) {
-        let divisions = findLayoutDivision(metadata.length)
+    function computeLayoutSlices(batchLength) {
+        if($metadata.length == 0) return []
+
+        let divisions = findLayoutDivision(batchLength)
         shuffle(divisions)
 
-        let index = 0;
+        let index = batchStart;
         return divisions.map((val) => {
             let slice = { start: index, end: index + val, val }
             index += val
@@ -43,8 +46,10 @@
         })
     }
 
-    const layoutSlices = $derived(computeLayoutSlices(photosMetadata))
-    const batchDate = $derived(convertUTCDate(photosMetadata[0]?.batchDateCreated))
+    let layoutSlices = $derived(computeLayoutSlices(batchEnd - batchStart))
+    let batchDate = $derived(convertUTCDate($metadata?.at(batchStart)?.batchDateCreated))
+    
+    const range = (start, stop) => [...Array(stop - start).keys().map((v) => v + start)]
 </script>
 
 <div class="photoContainer">
@@ -52,8 +57,8 @@
 		<p>{batchDate.toLocaleString()}</p>
 	{/if}
 
-    {#each layoutSlices as layout, i} 
-        {@render (getLayoutSnippet(layout.val))(photosMetadata.slice(layout.start, layout.end))}
+    {#each layoutSlices as layout} 
+        {@render (getLayoutSnippet(layout.val))(range(layout.start, layout.end))}
     {/each}
 </div>
 

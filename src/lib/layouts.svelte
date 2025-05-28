@@ -18,38 +18,38 @@
 
 {#snippet one([a])} 
     <div class="one">
-        <PhotoCard {...a} />
+        <PhotoCard index={a} />
     </div>
 {/snippet}
 
 {#snippet two([a, b])}
     <div class="grid-2">
-        <PhotoCard {...a}/>
-        <PhotoCard {...b}/>
+        <PhotoCard index={a}/>
+        <PhotoCard index={b}/>
     </div>
 {/snippet}
 
 {#snippet three1([a,b,c])}
     <div class="grid-3a">
-        <PhotoCard {...a} --g-cols="1 / 2" --g-rows="1 / 2"/>
-        <PhotoCard {...b} --g-cols="1 / 2" --g-rows="2 / 3"/>
-        <PhotoCard {...c} --g-cols="2 / 4" --g-rows="1 / 3"/>
+        <PhotoCard index={a} --g-cols="1 / 2" --g-rows="1 / 2"/>
+        <PhotoCard index={b} --g-cols="1 / 2" --g-rows="2 / 3"/>
+        <PhotoCard index={c} --g-cols="2 / 4" --g-rows="1 / 3"/>
     </div>
 {/snippet}
 
 {#snippet three2([a,b,c])}
     <div class="grid-3a">
-        <PhotoCard {...a} --g-cols="1 / 3" --g-rows="1 / 3"/>
-        <PhotoCard {...b} --g-cols="3 / 4" --g-rows="1 / 2"/>
-        <PhotoCard {...c} --g-cols="3 / 4" --g-rows="2 / 3"/>
+        <PhotoCard index={a} --g-cols="1 / 3" --g-rows="1 / 3"/>
+        <PhotoCard index={b} --g-cols="3 / 4" --g-rows="1 / 2"/>
+        <PhotoCard index={c} --g-cols="3 / 4" --g-rows="2 / 3"/>
     </div>
 {/snippet}
 
 {#snippet three3([a, b, c])}
     <div class="grid-3b">
-        <PhotoCard {...a}/>
-        <PhotoCard {...b}/>
-        <PhotoCard {...c}/>
+        <PhotoCard index={a}/>
+        <PhotoCard index={b}/>
+        <PhotoCard index={c}/>
     </div>
 {/snippet}
 
