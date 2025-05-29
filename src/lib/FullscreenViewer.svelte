@@ -61,7 +61,7 @@ class:focused={false}
   #fullscreen-viewer {
     position: fixed;
     top: 0; left: 0;
-    width: 100vw; height: 100vh;
+    width: 100vw; height: 100svh;
     z-index: -1;
     background: rgba(0,0,0,.75);
     display: flex;
