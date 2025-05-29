@@ -92,7 +92,7 @@
   #intersect-div {
     --bg1: #feffbc;
     --bg2: #fff786;
-    height: 100vh;
+    height: 100svh;
     width: 100vw;
     overflow-y: scroll;
     padding-left: 10px;
