@@ -5,8 +5,18 @@ COPY . .
 RUN npm i
 RUN npm run build
 
-FROM ghcr.io/static-web-server/static-web-server:2
-WORKDIR /app
-COPY --from=builder /app/dist /app/
+FROM nginx:alpine
 
-CMD ["--port", "8080",  "--root",  "/app"]
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+ARG PLATFORM=aarch64
+ADD https://github.com/andrewyur/cors-bypass-server/releases/download/1.0.2/cors-bypass-server-${PLATFORM} /usr/local/bin/cors-bypass
+RUN chmod +x /usr/local/bin/cors-bypass
+
+COPY nginx.conf /etc/nginx/nginx.conf
+
+ENV PORT=9000
+ENV WHITELIST=p129-sharedstreams.icloud.com
+ENV RUST_LOG=debug
+
+CMD ["sh", "-c", "/usr/local/bin/cors-bypass & nginx -g 'daemon off;'"]

@@ -1,0 +1,11 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '--build-arg', 'PLATFORM=x86_64',
+      '-t', 'us-central1-docker.pkg.dev/high-office-431317-a4/cloud-run-source-deploy/photography-website',
+      '.'
+    ]
+
+images:
+  - 'us-central1-docker.pkg.dev/high-office-431317-a4/cloud-run-source-deploy/photography-website'

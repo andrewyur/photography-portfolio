@@ -6,7 +6,7 @@ piggybacks off of a reverse-engineered private apple API for displaying photos i
 
 metadata for photos are periodically fetched by this [service](https://github.com/andrewyur/photography-fetcher#), stored in a cloud storage bucket, which is then loaded by the client and used to fetch urls for the photos.
 
-the website passes calls to the url generation API through a private forward proxy which attaches CORS headers, because the apple API does not include them.
+The private apple API does not include CORS headers in its JSON responses, so instead of using a dynamic route handler to proxy requests to the API, which would add a substantial amount to the startup time, it uses NGINX to route requests to the /api route to a [musl compiled binary](https://github.com/andrewyur/cors-bypass-server) which makes the request, and statically serves the rest of the files.
 
 ## Todo
 
