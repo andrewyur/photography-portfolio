@@ -64,7 +64,6 @@
 
 <style>
     .photoContainer {
-        min-height: 300px;
         width: 100%;
         box-sizing: border-box;
         /* background-color: red; */
@@ -76,6 +75,5 @@
     p {
         /* font-size: x-large; */
         font-style: italic;
-        margin-bottom: 0 ;
     }
 </style>
