@@ -29,9 +29,6 @@
 <style>
     img {
         width: 100%;
-        margin-left: auto;
-        margin-right: 0%;
-        display: block;
         opacity: 0;
         transition: opacity 0.2s ease;
     }
@@ -64,5 +61,8 @@
     #title-photo {
         background-color: rgba(1, 1, 1, 0.1);
         aspect-ratio: calc(1288 / 966);
+        margin-left: auto;
+        margin-right: 0%;
+        display: block;
     }
 </style>
