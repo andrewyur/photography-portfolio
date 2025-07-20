@@ -4,16 +4,20 @@
         mobile = window.innerHeight > window.innerWidth;
     });
 
-    function onLoad(event) {
-        event.target.classList.add('loaded');
+    let visible = $state(false);
+    function onLoad() {
+        visible = true;
     }
 </script>
 
-<div id="container">
+<div id="container" class:loaded={visible}>
     <!-- svelte-ignore a11y_missing_attribute -->
-    <div id="title-photo" style:width="{mobile ? 80 : 60}%">
-        <img src="/IMG_2507.webp" onload={onLoad} class:loaded={false} />
-    </div>
+    <img
+        src="/IMG_2507.webp"
+        onload={onLoad}
+        style:width="{mobile ? 80 : 60}%"
+    />
+    <div id="title-photo"></div>
     <h1>ANDREW PHOTOGRAPHY</h1>
     <p>
         I shoot mostly with a Canon Rebel T4i, and ocasionally with my digicam
@@ -29,12 +33,9 @@
 <style>
     img {
         width: 100%;
-        opacity: 0;
-        transition: opacity 0.2s ease;
-    }
-
-    .loaded {
-        opacity: 1;
+        margin-left: auto;
+        margin-right: 0%;
+        display: block;
     }
 
     h1 {
@@ -52,17 +53,15 @@
     #container {
         max-width: 1000px;
         margin: 15vh auto;
+        transition: opacity 0.2s ease;
+        opacity: 0;
         /* display: flex;
         flex-direction: column;
         gap: 50px; */
         /* justify-content: space-around; */
     }
 
-    #title-photo {
-        background-color: rgba(1, 1, 1, 0.1);
-        aspect-ratio: calc(1288 / 966);
-        margin-left: auto;
-        margin-right: 0%;
-        display: block;
+    .loaded {
+        opacity: 1 !important;
     }
 </style>

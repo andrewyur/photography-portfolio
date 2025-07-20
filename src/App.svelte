@@ -111,4 +111,8 @@
     width: 100%;
     height: 20px;
   }
+
+  main {
+    opacity: 0;
+  }
 </style>
